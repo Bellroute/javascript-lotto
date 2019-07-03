@@ -1,14 +1,13 @@
-export {printPurchaseResert}
 
-printPurchaseReselt = (count,lottoList) => {
+exports.printPurchaseResult = (count,lottoList) => {
     console.log('로또', count, '개를 발행했습니다.')
 
-    for (const lotto in lottoList) {
-        console.log(lotto)
+    for (const i in lottoList) {
+        console.log(lottoList[i].getNumber());
     }
 }
 
-printWinnerStatistic = winnerResult => {
+exports.printWinnerStatistic = winnerResult => {
     console.log('당첨 통계')
     console.log('---------')
     console.log('3개 일치 (5000원)- ', winnerResult.getNumberOfThreeMatch, '개')
@@ -17,3 +16,4 @@ printWinnerStatistic = winnerResult => {
     console.log('6개 일치 (20000000원)- ', winnerResult.getNumberOfSixMatch, '개')
     console.log('나의 수익률은 ', winnerResult.getWinnerRate, '%입니다.')
 }
+

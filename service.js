@@ -1,39 +1,44 @@
-import printPurchaseReselt from "./view";
-import Lotto from "./lotto";
-import {WinnerResult, getNumberOfThreeMatch} from "./winnerResult";
-
-module.exports = {buyLottos, setLuckyNumber}
-
+const Lotto = require('./lotto');
+const view = require('./view');
+const WinnerResult = require('./winnerResult');
 const MONEY_PER_LOTTO = 1000;
 const NUMBER_OF_LOTTO = 6
 let numbers = [];
-var lottoList = [];
 
-setNumbers => {
-    for (var i = 1; i <= 35; i++) {
+setNumbers = () => {
+    for (var i = 1; i <= 45; i++) {
         numbers.push(i);
+    }
+}
+
+shuffle = () => {
+    for (var i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
     }
 }
 
 buyLottos = money => {
     var numberOfLotto = money/MONEY_PER_LOTTO;
-    printPurchaseReselt(numberOfLotto, makeLottos(numberOfLotto, numberOfLotto));
+    view.printPurchaseResult(numberOfLotto, makeLottos(numberOfLotto));
 }
 
-makeLottos = (numberOfLotto, numberOfLotto) => {
+makeLottos = (numberOfLotto) => {
+    var lottoList = [];
     for(var i = 0; i < numberOfLotto; i++) {
-        lottoList.push(createLotto)
+        lottoList.push(createLotto())
     }
+    
     return lottoList;
 }
 
-createLotto => {
-    var lotto = new Lotto();
-    for(var i = 0; i < NUMBER_OF_LOTTO; i++) {
-        lotto.numbers.push(setNumbers[Math.floor(Math.random * setNumbers.length)])   
-    }
+createLotto = () => {
+    setNumbers();
+    shuffle();
+    var lotto = [];
+    lotto = numbers.slice(0, NUMBER_OF_LOTTO);
 
-    return lotto;
+    return new Lotto(lotto);
 }
 
 setLuckyNumber = luckyNumbers => {
@@ -69,5 +74,7 @@ checkWinner = luckyNumbers => {
         }
     }
 
-
+    var winnerResult = new WinnerResult(numberOfThreeMatch, numberOfFourMatch, numberOfFiveMatch, numberOfSixMatch);
 }
+
+module.exports = {buyLottos, setLuckyNumber}

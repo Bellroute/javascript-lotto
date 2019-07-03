@@ -1,6 +1,5 @@
-export {WinnerResult, getNumberOfThreeMatch, getNumberOfFourMatch, getNumberOfFiveMatch, getNumberOfSixMatch}
 
-class WinnerResult {
+module.exports = class WinnerResult {
     constructor(NumberOfThreeMatch, NumberOfFourMatch, NumberOfFiveMatch, NumberOfSixMatch, winnerRate) {
         this.NumberOfThreeMatch = NumberOfThreeMatch;
         this.NumberOfFourMatch = NumberOfFourMatch;
@@ -8,24 +7,25 @@ class WinnerResult {
         this.NumberOfSixMatch = NumberOfSixMatch;
         this.winnerRate = winnerRate;
     }
-}
+    
+    getNumberOfThreeMatch() {
+        return this.NumberOfThreeMatch;
+    }  
 
-getNumberOfThreeMatch => {
-    return this.NumberOfThreeMatch;
-}
+    getNumberOfFourMatch() {
+        return this.NumberOfFourMatch;
+    }
 
-getNumberOfFourMatch => {
-    return this.NumberOfFourMatch;
-}
+    getNumberOfFiveMatch() {
+        return this.NumberOfFiveMatch;
+    }
 
-getNumberOfFiveMatch => {
-    return this.NumberOfFiveMatch;
-}
+    getNumberOfSixMatch() {
+        return this.NumberOfSixMatch;
+    }
 
-getNumberOfSixMatch => {
-    return this.NumberOfSixMatch;
-}
+    getWinnerRate() {
+        return this.winnerRate;
+    }
+};
 
-getWinnerRate => {
-    return this.winnerRate;
-}
