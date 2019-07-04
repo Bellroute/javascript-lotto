@@ -4,6 +4,7 @@ const WinnerResult = require('./winnerResult');
 const MONEY_PER_LOTTO = 1000;
 const NUMBER_OF_LOTTO = 6
 let numbers = [];
+var lottoList = [];
 
 setNumbers = () => {
     for (var i = 1; i <= 45; i++) {
@@ -24,16 +25,15 @@ buyLottos = money => {
 }
 
 makeLottos = (numberOfLotto) => {
-    var lottoList = [];
+    setNumbers();
     for(var i = 0; i < numberOfLotto; i++) {
         lottoList.push(createLotto())
     }
-    
+
     return lottoList;
 }
 
 createLotto = () => {
-    setNumbers();
     shuffle();
     var lotto = [];
     lotto = numbers.slice(0, NUMBER_OF_LOTTO);
@@ -46,35 +46,44 @@ setLuckyNumber = luckyNumbers => {
 }
 
 checkWinner = luckyNumbers => {
-    numberOfThreeMatch = 0;
-    numberOfFourMatch = 0;
-    numberOfFiveMatch = 0;
-    numberOfSixMatch = 0;
+    var numberOfThreeMatch = 0;
+    var numberOfFourMatch = 0;
+    var numberOfFiveMatch = 0;
+    var numberOfSixMatch = 0;
 
-    for (const lotto in lottoList) {
+    for (var i = 0; i < lottoList.length; i++) {
         var count = 0;
 
-        for(const number in luckyNumbers) {
-            if(lotto.contain(number)) {
-                count++
+        for(var j in luckyNumbers) {
+            if(lottoList[i].contain(luckyNumbers[j])) {
+                count++;
             }
+
+            console.log('lotto: ', lottoList[i]);
+            console.log('number: ', luckyNumbers[j]);
+            console.log('count: ', count);
         }
 
-        if (count = 3) {
+        if (count == 3) {
             numberOfThreeMatch++;
         }
-        if (count = 4) {
+        if (count == 4) {
             numberOfFourMatch++;
         }
-        if (count = 5) {
+        if (count == 5) {
             numberOfFiveMatch++;
         }
-        if (count = 6) {
+        if (count == 6) {
             numberOfSixMatch++;
         }
     }
 
-    var winnerResult = new WinnerResult(numberOfThreeMatch, numberOfFourMatch, numberOfFiveMatch, numberOfSixMatch);
+    console.log(numberOfThreeMatch);
+    console.log(numberOfFourMatch);
+    console.log(numberOfFiveMatch);
+    console.log(numberOfSixMatch);
+
+    view.printWinnerStatistic(new WinnerResult(numberOfThreeMatch, numberOfFourMatch, numberOfFiveMatch, numberOfSixMatch, lottoList.length));
 }
 
 module.exports = {buyLottos, setLuckyNumber}

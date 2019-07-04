@@ -1,31 +1,34 @@
 
 module.exports = class WinnerResult {
-    constructor(NumberOfThreeMatch, NumberOfFourMatch, NumberOfFiveMatch, NumberOfSixMatch, winnerRate) {
-        this.NumberOfThreeMatch = NumberOfThreeMatch;
-        this.NumberOfFourMatch = NumberOfFourMatch;
-        this.NumberOfFiveMatch = NumberOfFiveMatch;
-        this.NumberOfSixMatch = NumberOfSixMatch;
-        this.winnerRate = winnerRate;
+    constructor(numberOfThreeMatch, numberOfFourMatch, numberOfFiveMatch, numberOfSixMatch, numberOfLottos) {
+        this.numberOfThreeMatch = numberOfThreeMatch;
+        this.numberOfFourMatch = numberOfFourMatch;
+        this.numberOfFiveMatch = numberOfFiveMatch;
+        this.numberOfSixMatch = numberOfSixMatch;
+        this.numberOfLottos = numberOfLottos;
     }
     
     getNumberOfThreeMatch() {
-        return this.NumberOfThreeMatch;
+        return this.numberOfThreeMatch;
     }  
 
     getNumberOfFourMatch() {
-        return this.NumberOfFourMatch;
+        return this.numberOfFourMatch;
     }
 
     getNumberOfFiveMatch() {
-        return this.NumberOfFiveMatch;
+        return this.numberOfFiveMatch;
     }
 
     getNumberOfSixMatch() {
-        return this.NumberOfSixMatch;
+        return this.numberOfSixMatch;
     }
 
     getWinnerRate() {
-        return this.winnerRate;
+        var profit = this.numberOfThreeMatch * 5000 + this.numberOfFourMatch * 50000 + this.numberOfFiveMatch * 150000 + this.numberOfSixMatch * 20000000;
+        var cost = this.numberOfLottos * 1000;
+
+        return profit/cost;
     }
 };
 
